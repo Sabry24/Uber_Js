@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<style>
+label {
+    display: inline-block;
+	width: 70px;
+}
+</style>
+
+</head>
+<body>
+<h1>Ingresos De Viajes</h1>
+   <label>origen</label>
+	<input type="text" id= "origen">
+	<br>
+	<br>
+	<label>destino</label>
+	<input type="text" id="destino">
+	<br>
+	<br>
+	<label>km</label>
+	<input type="text" id="km">
+	<br>
+	<br>
+	<label>tiempo</label>
+	<input type="text" id="tiempo">
+	<br>
+	<br>
+	<button>ok</button>
+	<p id="precio_viaje"></p>
+	<p id="viajes"></p>
+	<p id="cantidad_viajes"></p>
+    <script>
+    var btn_click = document.querySelector('button');
+    const tarifa_base=20;
+    let valor_km=6.50;
+    const valor_minuto=2.40;
+    const valor_porcentaje=0.035 /* 3,5 % */
+    var precio_viajes = [];
+    
+    btn_click.onclick = function() {
+    /* calcular el valor del viaje */	
+    
+    let txt_km=document.querySelector("#km").value;
+    let txt_tiempo=document.querySelector("#tiempo").value;
+    
+    if (txt_km<30)
+    {
+    let calculo_auxiliar=tarifa_base+(valor_km*txt_km)+(valor_minuto*txt_tiempo);
+    let costo_viaje=(valor_porcentaje*calculo_auxiliar)+calculo_auxiliar;
+    
+    document.querySelector('#precio_viaje').innerHTML= "Precio Viaje:" + costo_viaje;
+    precio_viajes.push(costo_viaje);
+    document.querySelector('#viajes').innerHTML= "Viajes:" + precio_viajes.toString();
+    document.querySelector('#Cantidad_Viajes').innerHTML= "Cantida de Viajes" + precio_viajes.length    	
+    }
+    else
+    {
+    	/* Recargo de 5,50 por km */
+    valor_km=12;	
+    let calculo_auxiliar=tarifa_base+(valor_km*txt_km)+(valor_minuto*txt_tiempo);
+    let costo_viaje=(valor_porcentaje*calculo_auxiliar)+calculo_auxiliar;
+    
+    document.querySelector('#precio_viaje').innerHTML= "Precio Viaje:" + costo_viaje;
+    precio_viajes.push(costo_viaje);
+    document.querySelector('#viajes').innerHTML= "Viajes:" + precio_viajes.toString();
+    document.querySelector('#Cantidad_Viajes').innerHTML= "Cantida de Viajes" + precio_viajes.length    
+    }
+    
+    }
+    
+</script>
+
+</body>
+</html>
